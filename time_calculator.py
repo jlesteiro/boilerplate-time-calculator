@@ -40,6 +40,16 @@ def add_time(start, duration, weekday = None):
         new_time += str(end_min)
     new_time += " " + end_meridiano
 
+    if weekday:
+        iter = 0
+        index = None
+        for day in week:
+            if weekday.casefold() == day.casefold():
+                index = iter
+            iter += 1
+        sorted_week = week[index:] + week[:index]
+        new_time += ", " + sorted_week[redondea( ((days_past/7) - int(days_past/7))*7 )]
+
     if days_past > 0:
         if days_past == 1:
             new_time += " (next day)"
@@ -64,9 +74,3 @@ def read_input(start,duration):
     duration_h = int(duration_h)
     duration_min = int(duration_min)
     return start_h, start_min, duration_h, duration_min, meridiano
-
-
-# if weekday:
-#         print(weekday)
-#     else:
-#         print("no weekday")
